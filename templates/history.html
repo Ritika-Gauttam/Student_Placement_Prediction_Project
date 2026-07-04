@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History</title>
+</head>
+<body>
+
+    <h1>Student Placement Prediction History</h1>
+
+    <table border="1">
+        <tr>
+            <th>Student Name</th>
+            <th>Branch</th>
+            <th>CGPA</th>
+            <th>Coding Skills</th>
+            <th>Communication Skills</th>
+            <th>Prediction</th>
+        </tr>
+
+        {% for prediction in historical_data %}
+        <tr>
+            <td>{{ prediction[1] }}</td>
+            <td>{{ prediction[2] }}</td>
+            <td>{{ prediction[3] }}</td>
+            <td>{{ prediction[4] }}</td>
+            <td>{{ prediction[5] }}</td>
+            <td>
+                {% if prediction[0] == 1 %}
+                    Placed
+                {% else %}
+                    Not Placed
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+</html>

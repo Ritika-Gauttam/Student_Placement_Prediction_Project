@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Placement Prediction</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            margin:0;
+            padding:0;
+            background-color:#f4f4f4;
+        }
+
+        header{
+            background-color:#2e3a59;
+            color:white;
+            text-align:center;
+            padding:20px;
+        }
+
+        main{
+            width:50%;
+            margin:20px auto;
+        }
+
+        .form-container{
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        input,select{
+            width:100%;
+            padding:10px;
+            margin-top:5px;
+            margin-bottom:15px;
+        }
+
+        button{
+            background-color:#2e3a59;
+            color:white;
+            border:none;
+            padding:10px 20px;
+            border-radius:5px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background-color:#1d2740;
+        }
+
+        .prediction{
+            text-align:center;
+            margin-top:20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Student Placement Prediction System</h1>
+</header>
+
+<main>
+
+<div class="form-container">
+
+    <h2>Enter Student Details</h2>
+
+    <form action="{{ url_for('predict') }}" method="post">
+
+        <label>Branch</label>
+            <select name="branch" required>
+                <option value="" selected disabled>Select branch</option> 
+                <option value="ECE">ECE</option>
+                <option value="Chemical">Chemical</option>
+                <option value="EE">Electrical Engineering (EE)</option>
+                <option value="CE">Civil Engineering (CE)</option>
+                <option value="CSE">Computer Science Engineering (CSE)</option>
+                <option value="IT">Information Technology (IT)</option>
+                <option value="ME">Mechanical Engineering (ME)</option>
+            </select>
+
+        <label>College Tier</label>
+            <select name="college_tier" required>
+                <option value="" selected disabled>Select college tier</option>
+                <option value="2">Tier-1</option>
+                <option value="1">Tier-2</option>
+                <option value="0">Tier-3</option>
+            </select>
+
+
+        <label>CGPA</label>
+        <input type="number"
+            name="cgpa"
+            min="1"
+            max="10"
+            step="0.01"
+            placeholder="1.0 - 10.0"
+            oninvalid="this.setCustomValidity('Please enter a value between 1.0 and 10.0')"
+            oninput="this.setCustomValidity('')"
+            required>
+
+
+        <label>Backlogs</label>
+        <select name="backlogs" required>
+            <option value="" selected disabled>Select number of backlogs</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+
+        <label>Coding Skills</label>
+        <input type="number"
+            name="coding_skills"
+            min="1"
+            max="10"
+            step="0.1"
+            placeholder="1.0 - 10.0"
+            oninvalid="this.setCustomValidity('Please enter a value between 1.0 and 10.0')"
+            oninput="this.setCustomValidity('')"
+            required>
+
+
+     <label>DSA Score</label>
+        <input type="number"
+            name="dsa_score"
+            min="1"
+            max="10"
+            step="0.1"
+            placeholder="1.0 - 10.0"
+            oninvalid="this.setCustomValidity('Please enter a value between 1.0 and 10.0')"
+            oninput="this.setCustomValidity('')"
+            required>
+
+
+
+        <label>Aptitude Score</label>
+        <input type="number"
+            name="aptitude_score"
+            min="20"
+            max="100"
+            step="0.1"
+            placeholder="20.0 - 100.0"
+            oninvalid="this.setCustomValidity('Please enter a value between 20.0 and 100.0')"
+            oninput="this.setCustomValidity('')"
+            required>
+
+
+        <label>Communication Skills</label>
+        <input type="number"
+       name="communication_skills"
+       min="1"
+       max="10"
+       step="0.1"
+       placeholder="Enter value between 1.0 and 10.0"
+       oninvalid="this.setCustomValidity('Please enter a value between 1.0 and 10.0')"
+       oninput="this.setCustomValidity('')"
+       required>
+
+
+        <label>ML Knowledge</label>
+        <input type="number"
+            name="ml_knowledge"
+            min="0"
+            max="10"
+            step="0.1"
+            placeholder="0.0 - 10.0"
+            oninvalid="this.setCustomValidity('Please enter a value between 0.0 and 10.0')"
+            oninput="this.setCustomValidity('')"
+            required>
+
+
+
+        <label>System Design</label>
+        <input type="number"
+            name="system_design"
+            min="0"
+            max="10"
+            step="0.1"
+            placeholder="0.0 - 10.0"
+            oninvalid="this.setCustomValidity('Please enter a value between 0.0 and 10.0')"
+            oninput="this.setCustomValidity('')"
+            required>
+
+
+       <label>Internships</label>
+        <select name="internships" required>
+            <option value="" selected disabled>Select number of internships</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+
+        
+        <label>Projects Count</label>
+        <select name="projects_count" required>
+            <option value="" selected disabled>Select number of projects</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+
+
+       <label>Certifications</label>
+        <select name="certifications" required>
+            <option value="" selected disabled>Select number of certifications</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+
+       
+        <button type="submit">Predict Placement</button>
+
+    </form>
+
+</div>
+
+<div class="prediction">
+    <h2>{{ prediction }}</h2>
+</div>
+
+</main>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
